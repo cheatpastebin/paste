@@ -1,0 +1,24 @@
+name: Download and Run Python Script
+
+# İş akışı her 2 saatte bir çalışacak.
+on:
+  schedule:
+    - cron: "0 */2 * * *"  # Her 2 saatte bir çalışır (UTC)
+
+jobs:
+  download_and_run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Python'ı kur
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"  # İhtiyacın olan Python sürümünü belirt
+
+    - name: Python dosyasını indir
+      run: |
+        curl -o script.py https://example.com/path/to/your/python_script.py
+        
+    - name: Python dosyasını çalıştır
+      run: |
+        python3 script.py
